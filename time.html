@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Temperature Converter</h1>
+    <div>
+        <label for="temp">Enter Temperature:</label>
+        <input type="number" id="temp" placeholder="Temperature">
+    </div>
+    <div>
+        <label for="conversionType">Conversion Type:</label>
+        <select id="conversionType">
+            <option value="1">Celsius to Fahrenheit</option>
+            <option value="2">Fahrenheit to Celsius</option>
+        </select>
+    </div>
+    <button onclick="startConversion()">Start Conversion</button>
+    <div id="result"></div>
+    <div id="timer"></div>
+
+    <script>
+        let timer;
+
+        function startConversion() {
+            const temp = document.getElementById('temp').value;
+            const conversionType = document.getElementById('conversionType').value;
+            const startTime = Date.now();
+
+            if (temp === '') {
+                alert('Please enter a temperature value.');
+                return;
+            }
+
+            let result;
+            if (conversionType === '1') {
+                result = (temp * 9 / 5) + 32;
+                result = `${temp} Celsius is ${result} Fahrenheit`;
+            } else {
+                result = (temp - 32) * 5 / 9;
+                result = `${temp} Fahrenheit is ${result} Celsius`;
+            }
+
+            const endTime = Date.now();
+            const timeTaken = endTime - startTime;
+            document.getElementById('result').innerText = result;
+            document.getElementById('timer').innerText = `Time taken: ${timeTaken} milliseconds`;
+        }
+    </script>
+</body>
+</html>
